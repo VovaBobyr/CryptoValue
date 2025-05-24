@@ -1,6 +1,9 @@
 # 🪙 Crypto Daily Price Tracker
 
 This project helps you track the **daily prices** of your selected cryptocurrency tickers from major exchanges (**MEXC** as primary, **Bybit** as fallback). It collects current prices, compares them with previous values, and saves historical diffs — so you can analyze market movement day by day.
+Example output:
+![image](https://github.com/user-attachments/assets/bdc1dd73-2563-4e5f-aea9-cfdd56f5d39f)
+
 
 ---
 
