@@ -1,0 +1,28 @@
+{
+    "binance": {
+        "apiKey": "A5QSfHVhtGWju75Mvq2lf9PLzAcvwGNPWzqJcxEQc5EkCqfwUwVdTJE76kLR5JsM",
+        "secret": "MTm0vGMiUF6IGKykbd2mKOYrllpN3Uwv8AEStGe659d2jQLzKdbVSKI5U6w59bBA"
+    },
+    "bybit": {
+        "main": {
+            "apiKey": "Ypjc2FfoN30lU3NfJd",
+            "secret": "DgDLg4fUMmly2H8HGE3YRAT5iyhuwhujpy8G"
+        },
+        "strategicCheck": {
+            "apiKey": "w3Ed6PTfuxeZSZ2VRA",
+            "secret": "CBVJGlnSPhyQI1CvD8b9uZlco3AcKJccm4KN"
+        },
+        "scalping": {
+            "apiKey": "NqBOYbZ626bKKgAczc",
+            "secret": "NvQKha5ARxksciuGWHEUMZ3KzOiNKUU78OPY"
+        }
+    },
+    "mexc": {
+        "apiKey": "mx0vgla56ce80dtya1",
+        "secret": "e7b86716f9ac4df09862c466ae32801e"
+    },
+    "bitget": {
+        "apiKey": "bg_1ec2c0cf56f0b8591ff84a0007d61d3a",
+        "secret": "854200483a2489a5e7faf37ef23b27a92ecfd7b018d4fcfff09301baa455dae0"
+    }
+}
