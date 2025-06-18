@@ -86,9 +86,12 @@ You should paste the data into the `statistics_template.csv` starting from the `
 ### ✂️ Copy Example
 
 Let’s say your `fetch_crypto_prices.csv` looks like this:
-YestDayPrice StartDayPrice OldPrice NewPrice PriceDiff CurrYestPriceDiff
-42300.00 42650.00 42710.00 42840.00 0.30 1.28
-2180.00 2200.00 2210.00 2225.00 0.68 2.06
+
+```bash
+| YestDayPrice | StartDayPrice | OldPrice | NewPrice | PriceDiff | CurrYestPriceDiff |
+| 42300.00 | 42650.00 | 42710.00 | 42840.00 | 0.30 | 1.28 |
+| 2180.00 | 2200.00 | 2210.00 | 2225.00 | 0.68 | 2.06 |
+```
 
 You would **copy this block** (excluding `Ticker`), and paste it into your `statistics_template.csv` starting at the `YestDayPrice` column.
 
@@ -146,6 +149,7 @@ You can schedule the script to run automatically every morning.
 
 ``bash
 0 8 * * * /usr/bin/python3 /path/to/fetch_crypto_prices_current.py
+```
 
 📌 Make sure file paths and Python binary locations are correct.
 
