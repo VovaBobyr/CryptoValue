@@ -64,7 +64,26 @@ def fetch_crypto_prices(input_file, output_file, last_run_date_file):
         symbol_busd = f"{ticker}BUSD"
 
         # Get the current price for the ticker
+        # Try MEXC first
         new_price = prices.get(symbol_usdt) or prices.get(symbol_busd)
+
+        # If not found, fallback to Bybit
+        if new_price is None:
+            if not hasattr(fetch_crypto_prices, "bybit_prices"):
+                # Fetch Bybit prices only once and cache
+                bybit_response = requests.get("https://api.bybit.com/v5/market/tickers", params={"category": "spot"})
+                bybit_response.raise_for_status()
+                bybit_data = bybit_response.json()
+                if bybit_data["retCode"] == 0:
+                    fetch_crypto_prices.bybit_prices = {
+                        item["symbol"]: Decimal(item["lastPrice"])
+                        for item in bybit_data["result"]["list"]
+                    }
+                else:
+                    fetch_crypto_prices.bybit_prices = {}
+
+            bybit_prices = fetch_crypto_prices.bybit_prices
+            new_price = bybit_prices.get(symbol_usdt) or bybit_prices.get(symbol_busd)
 
         if new_price is None:
             output_data.append([ticker, "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"])
