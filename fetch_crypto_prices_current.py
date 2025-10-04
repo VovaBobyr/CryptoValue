@@ -84,7 +84,6 @@ def fetch_crypto_prices(input_file, output_file, last_run_date_file):
 
             bybit_prices = fetch_crypto_prices.bybit_prices
             new_price = bybit_prices.get(symbol_usdt) or bybit_prices.get(symbol_busd)
-
         if new_price is None:
             output_data.append([ticker, "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"])
             continue
