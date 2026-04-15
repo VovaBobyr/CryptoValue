@@ -1,0 +1,29 @@
+# === Secrets & credentials ===
+api_keys.json
+*keys*.json
+.env
+.env.*
+
+# === Runtime state files ===
+lastrundate.txt
+
+# === Script output (CSV / TSV) ===
+*.csv
+*.tsv
+
+# === Python cache ===
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# === Virtual environments ===
+.venv/
+venv/
+env/
+
+# === IDE folders ===
+.vscode/
+.idea/
+*.iml

@@ -3,9 +3,12 @@ import csv
 import requests
 from decimal import Decimal, InvalidOperation
 from datetime import datetime
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # ========== Налаштування ==========
-CMC_API_KEY = "952df909-9520-4b32-8380-9aa6a658db87"  # <-- встав сюди свій CoinMarketCap API ключ
+CMC_API_KEY = os.environ.get("CMC_API_KEY", "")  # set CMC_API_KEY in .env — see .env.example
 NEW_TV_STYLE_OTHERS_TICKER = "OTHERSX10.D"  # назва нового індексу "все, крім ТОП-10"
 
 MEXC_TICKER_URL = "https://api.mexc.com/api/v3/ticker/price"
@@ -220,6 +223,16 @@ def main():
     # 1) список тікерів (зберігаємо порожні рядки)
     with open(input_file, "r", encoding="utf-8") as f:
         tickers_raw = [line.rstrip("\n") for line in f]
+
+    # Fail fast if CMC tickers are requested but the API key is missing
+    CMC_TICKERS = {"BTC.D", "ETH.D", "OTHERS.D", NEW_TV_STYLE_OTHERS_TICKER}
+    active_tickers = {line.strip().upper() for line in tickers_raw if line.strip()}
+    if active_tickers & CMC_TICKERS and not CMC_API_KEY:
+        raise EnvironmentError(
+            f"Ticker list includes CMC-backed indices {active_tickers & CMC_TICKERS} "
+            "but CMC_API_KEY is not set.\n"
+            "Add CMC_API_KEY to your .env file — see .env.example."
+        )
 
     # 2) джерела цін
     mexc_prices = fetch_mexc_prices()

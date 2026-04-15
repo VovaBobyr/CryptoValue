@@ -1,15 +1,67 @@
 import ccxt
 import time
-import json
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
-# Load API keys from an external JSON file
-def load_api_keys(file_path):
-    if not os.path.exists(file_path):
-        raise FileNotFoundError(f"API keys file not found: {file_path}")
-    with open(file_path, 'r') as file:
-        return json.load(file)
+def load_api_keys():
+    """Load exchange API credentials from environment variables.
+
+    All variables must be set before running this script — either as OS
+    environment variables or in a .env file in the project root.
+    See .env.example for the full list.
+    """
+    required = {
+        "BINANCE_API_KEY": os.environ.get("BINANCE_API_KEY"),
+        "BINANCE_SECRET": os.environ.get("BINANCE_SECRET"),
+        "BYBIT_MAIN_API_KEY": os.environ.get("BYBIT_MAIN_API_KEY"),
+        "BYBIT_MAIN_SECRET": os.environ.get("BYBIT_MAIN_SECRET"),
+        "BYBIT_STRATEGICCHECK_API_KEY": os.environ.get("BYBIT_STRATEGICCHECK_API_KEY"),
+        "BYBIT_STRATEGICCHECK_SECRET": os.environ.get("BYBIT_STRATEGICCHECK_SECRET"),
+        "BYBIT_SCALPING_API_KEY": os.environ.get("BYBIT_SCALPING_API_KEY"),
+        "BYBIT_SCALPING_SECRET": os.environ.get("BYBIT_SCALPING_SECRET"),
+        "MEXC_API_KEY": os.environ.get("MEXC_API_KEY"),
+        "MEXC_SECRET": os.environ.get("MEXC_SECRET"),
+        "BITGET_API_KEY": os.environ.get("BITGET_API_KEY"),
+        "BITGET_SECRET": os.environ.get("BITGET_SECRET"),
+    }
+    missing = [name for name, val in required.items() if not val]
+    if missing:
+        raise EnvironmentError(
+            f"Missing required environment variables: {', '.join(missing)}\n"
+            "Copy .env.example to .env and fill in your credentials."
+        )
+
+    return {
+        "binance": {
+            "apiKey": required["BINANCE_API_KEY"],
+            "secret": required["BINANCE_SECRET"],
+        },
+        "bybit": {
+            "main": {
+                "apiKey": required["BYBIT_MAIN_API_KEY"],
+                "secret": required["BYBIT_MAIN_SECRET"],
+            },
+            "strategicCheck": {
+                "apiKey": required["BYBIT_STRATEGICCHECK_API_KEY"],
+                "secret": required["BYBIT_STRATEGICCHECK_SECRET"],
+            },
+            "scalping": {
+                "apiKey": required["BYBIT_SCALPING_API_KEY"],
+                "secret": required["BYBIT_SCALPING_SECRET"],
+            },
+        },
+        "mexc": {
+            "apiKey": required["MEXC_API_KEY"],
+            "secret": required["MEXC_SECRET"],
+        },
+        "bitget": {
+            "apiKey": required["BITGET_API_KEY"],
+            "secret": required["BITGET_SECRET"],
+        },
+    }
 
 
 # Initialize exchanges
@@ -75,8 +127,7 @@ def fetch_trades(exchange):
 
 
 def main():
-    api_keys_file = 'api_keys.json'
-    api_keys = load_api_keys(api_keys_file)
+    api_keys = load_api_keys()
     exchanges = initialize_exchanges(api_keys)
 
     for name, exchange in exchanges.items():

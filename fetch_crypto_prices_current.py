@@ -128,7 +128,8 @@ def fetch_crypto_prices(input_file, output_file, last_run_date_file):
     with open(last_run_date_file, "w") as f:
         f.write(str(today_date))
 
-input_file = "crypto_tickers.txt"
-output_file = "fetch_crypto_prices.csv"
-last_run_date_file = "lastrundate.txt"
-fetch_crypto_prices(input_file, output_file, last_run_date_file)
+if __name__ == "__main__":
+    input_file = "crypto_tickers.txt"
+    output_file = "fetch_crypto_prices.csv"
+    last_run_date_file = "lastrundate.txt"
+    fetch_crypto_prices(input_file, output_file, last_run_date_file)

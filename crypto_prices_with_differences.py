@@ -88,12 +88,13 @@ def fetch_prices_with_differences(input_file, output_file, datetime1, datetime2)
 
     print(f"Prices with percentage differences exported to {output_file}")
 
-# Input and output file paths
-input_file = "crypto_historical_tickers.txt"  # New input file name for this script
-output_file = "crypto_historical_prices_with_percentages.csv"  # Output file name
+if __name__ == "__main__":
+    # Input and output file paths
+    input_file = "crypto_historical_tickers.txt"
+    output_file = "crypto_historical_prices_with_percentages.csv"
 
-# Specify datetimes for comparison
-datetime1 = "2024-11-01 12:00:00"  # Replace with your desired datetime1
-datetime2 = "2024-11-15 12:00:00"  # Replace with your desired datetime2
+    # Specify datetimes for comparison
+    datetime1 = "2024-11-01 12:00:00"  # Replace with your desired datetime1
+    datetime2 = "2024-11-15 12:00:00"  # Replace with your desired datetime2
 
-fetch_prices_with_differences(input_file, output_file, datetime1, datetime2)
+    fetch_prices_with_differences(input_file, output_file, datetime1, datetime2)

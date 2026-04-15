@@ -1,0 +1,11 @@
+# CryptoValue dependencies
+# Install with: pip install -r requirements.txt
+
+# HTTP requests (used by all price-fetching scripts)
+requests==2.32.3
+
+# Multi-exchange connector (used by crypto_data_fetcher_API.py)
+ccxt>=4.0.0
+
+# Load .env file into environment variables
+python-dotenv>=1.0.0
